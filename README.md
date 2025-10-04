@@ -39,9 +39,26 @@ SELECT tweet_id
 FROM Tweets
 WHERE length(content) > 15
 ```
-6. a
-7. a
-8. a
+6. [1378 - Replace Employee ID With The Unique Identifier](https://leetcode.com/problems/replace-employee-id-with-the-unique-identifier)
+```sql
+SELECT unique_id, name
+FROM Employees
+LEFT JOIN EmployeeUNI 
+ON Employees.id = EmployeeUNI.id
+```
+7. [1068 - Product Sales Analysis I](https://leetcode.com/problems/product-sales-analysis-i/)
+```sql
+SELECT product_name, year, price
+FROM Product
+INNER JOIN Sales ON Product.product_id = Sales.product_id
+```
+8. [1581 - Customer Who Visited but Did Not Make Any Transactions](https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions/)
+```sql
+SELECT customer_id, COUNT(*) as count_no_trans
+FROM Visits 
+WHERE visit_id NOT IN (SELECT DISTINCT visit_id FROM Transactions)
+GROUP BY customer_id
+```
 9. a
 10. a
 11. a
