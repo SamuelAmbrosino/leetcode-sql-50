@@ -59,13 +59,59 @@ FROM Visits
 WHERE visit_id NOT IN (SELECT DISTINCT visit_id FROM Transactions)
 GROUP BY customer_id
 ```
-9. a
-10. a
-11. a
-
-12. a
-13. a
-14. a
+9. [197 - Rising Temperature](https://leetcode.com/problems/rising-temperature/) 
+```sql
+SELECT table1.id
+FROM Weather table1, Weather table2
+WHERE DATEDIFF(table1.recordDate, table2.recordDate) = 1
+AND table1.temperature > table2.temperature
+```
+10. 
+[1661 - Average Time of Process per Machine](https://leetcode.com/problems/average-time-of-process-per-machine/)
+```sql
+SELECT machine_id, ROUND(AVG(end_t - start_t),3) AS processing_time
+FROM
+(SELECT machine_id, process_id, 
+    MAX(CASE WHEN activity_type = 'start' THEN timestamp END) AS start_t,
+    MAX(CASE WHEN activity_type = 'end' THEN timestamp END) AS end_t
+ FROM Activity 
+  GROUP BY machine_id, process_id) AS sorting
+GROUP BY machine_id
+```
+11. [577 - Employee Bonus](https://leetcode.com/problems/employee-bonus/solutions/)
+```sql
+SELECT name, bonus
+FROM Employee
+LEFT JOIN Bonus ON Employee.empId = Bonus.empId
+WHERE bonus < 1000 OR bonus IS NULL
+```
+12. [1280 - Students and Examinations](https://leetcode.com/problems/students-and-examinations/)
+```sql
+SELECT stu.student_id, stu.student_name, sub.subject_name, COUNT(exa.subject_name) AS attended_exams
+FROM Students stu
+JOIN Subjects sub
+LEFT JOIN Examinations exa
+ON stu.student_id = exa.student_id
+AND sub.subject_name = exa.subject_name
+GROUP BY stu.student_id, sub.subject_name
+ORDER BY stu.student_id, sub.subject_name
+```
+13. [570. Managers with at Least 5 Direct Reports](https://leetcode.com/problems/managers-with-at-least-5-direct-reports)
+```sql
+SELECT e1.name
+FROM Employee e1
+JOIN Employee e2
+ON e1.id = e2.managerId
+GROUP BY e1.id
+HAVING COUNT(e2.id) >= 5;
+```
+14. [1934. Confirmation Rate](https://leetcode.com/problems/confirmation-rate/)
+```sql
+SELECT sig.user_id, ROUND(AVG(IF(conf.action = 'confirmed',1,0)),2) AS confirmation_rate
+FROM Signups as sig
+LEFT JOIN Confirmations AS conf ON sig.user_id = conf.user_id
+GROUP BY sig.user_id;
+```
 15. a
 16. a
 
