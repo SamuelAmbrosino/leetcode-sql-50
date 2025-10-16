@@ -112,7 +112,14 @@ FROM Signups as sig
 LEFT JOIN Confirmations AS conf ON sig.user_id = conf.user_id
 GROUP BY sig.user_id;
 ```
-15. a
+15. [620. Not Boring Movies](https://leetcode.com/problems/not-boring-movies)
+```sql
+SELECT *
+FROM Cinema
+WHERE id % 2 <> 0 
+AND description <> "boring"
+ORDER BY rating DESC
+```
 16. a
 
 17. a
