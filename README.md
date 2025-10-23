@@ -120,47 +120,73 @@ WHERE id % 2 <> 0
 AND description <> "boring"
 ORDER BY rating DESC
 ```
-16. a
-
-17. a
-18. a
-19. a
+16. [1251. Average Selling Price](https://leetcode.com/problems/average-selling-price/)
+```sql
+SELECT p.product_id, COALESCE(ROUND(SUM(price * units) / SUM(units), 2),0) AS average_price
+FROM Prices p
+LEFT JOIN UnitsSold s
+ON p.product_id = s.product_id 
+AND purchase_date BETWEEN start_date AND end_date
+GROUP BY p.product_id
+```
+17. 
+[1075. Project Employees I](https://leetcode.com/problems/project-employees-i)
+```sql
+SELECT project_id, ROUND(AVG(experience_years), 2) average_years
+FROM Project p 
+LEFT JOIN Employee e
+ON p.employee_id = e.employee_id
+GROUP BY project_id
+```
+18. [1633. Percentage of Users Attended a Contest](https://leetcode.com/problems/percentage-of-users-attended-a-contest)
+```sql
+SELECT r.contest_id, ROUND(COUNT(DISTINCT r.user_id) * 100 / (SELECT COUNT(DISTINCT user_id) FROM Users), 2) AS percentage
+FROM Register r
+GROUP BY r.contest_id
+ORDER BY percentage DESC, r.contest_id ASC;
+```
+19. [1211 Queries Quality and Percentage](https://leetcode.com/problems/queries-quality-and-percentage)
+```sql
+SELECT query_name, ROUND(AVG(rating/position), 2) AS quality,
+ROUND(SUM(CASE WHEN rating < 3 THEN 1 ELSE 0 END) / COUNT(rating) * 100, 2) AS poor_query_percentage
+FROM Queries
+GROUP BY query_name
+```
 20. a
-21. a
 
+21. a
 22. a
 23. a
 24. a
 25. a
-26. a
 
+26. a
 27. a
 28. a
 29. a
-30. a
 
+30. a
 31. a
 32. a
 33. a
-34. a
 
+34. a
 35. a
 36. a
 37. a
 38. a
-39. a
 
+39. a
 40. a
 41. a
 42. a
-43. a
 
+43. a
 44. a
 45. a
 46. a
 47. a
+
 48. a
 
 49. a
-
-50. a
